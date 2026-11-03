@@ -250,6 +250,9 @@ svg{display:block}
 .cover .t{font:800 1.875rem/1.3 var(--serif);margin-top:5%}
 .cover.black{background:var(--lampblack);color:var(--lime);transform:rotate(3deg);padding:17% 12% 0}
 .cover.black .t{font-family:var(--stencil);margin-top:16%}
+.cover.hand{background:var(--lime);transform:rotate(-2deg);padding:17% 12% 0 15%}
+.cover.hand .t{font-family:var(--stencil);margin-top:16%}
+.cover.hand::before{content:"";position:absolute;left:14px;top:4%;bottom:4%;border-left:2px dashed var(--lampblack)}
 .leaf{background:var(--lime);padding:44px 30px 30px;font:400 1.1875rem/1.72 var(--serif);white-space:pre-line}
 .mm{position:absolute;left:0;right:0;top:26px;height:12px;
   background-image:repeating-linear-gradient(90deg,var(--lampblack) 0 1px,transparent 1px 37.75px),repeating-linear-gradient(90deg,var(--lampblack) 0 .6px,transparent .6px 3.775px);
@@ -259,6 +262,8 @@ svg{display:block}
 .facts dd{font-weight:700}
 .book-say{font:400 clamp(1.25rem,2vw,1.625rem)/1.25 var(--serif);text-wrap:balance}
 .leaf.blank{display:flex;align-items:flex-end;font:600 .9375rem/1.3 var(--util)}
+.leaf.sketch{flex-direction:column;justify-content:space-between;align-items:stretch;padding-top:30px}
+.leaf.sketch svg{width:86%;height:auto;overflow:visible}
 .buy{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .fmt{font:600 1rem/1.2 var(--util);display:flex;align-items:center;gap:8px}
 .fmt select{width:auto;padding:9px 8px 7px}
@@ -488,6 +493,33 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
           </div>
         </div>
       </article>
+      <article class="pub">
+        <div class="objects">
+          <div class="cover hand" role="img" aria-label="Placeholder cover for the handmade Wal.bo lyric book: the band’s logo in black on white paper, with a stitched spine">
+            <svg viewBox="0 0 996 867" aria-hidden="true"><use href="#s-walbo"/></svg>
+            <span class="t" aria-hidden="true">Lyrics</span>
+          </div>
+          <div class="leaf blank sketch"><svg class="sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="33"></svg><span>Sketches and artworks to come.</span></div>
+        </div>
+        <div class="pub-text">
+          <span class="chip">Only 10 pieces</span>
+          <h3>Wal.bo lyrics, handmade</h3>
+          <p class="book-say">A handmade lyric book with album art sketches and other artworks from the time of Wal.bo.</p>
+          <dl class="facts">
+            <dt>Status</dt><dd>Planned</dd>
+            <dt>Format</dt><dd>Handmade, print only</dd>
+            <dt>Edition</dt><dd>10 pieces</dd>
+            <dt>Price</dt><dd>To be set</dd>
+          </dl>
+          <div class="buy">
+            <div class="stepper" data-item="lyrics-hand" role="group" aria-label="Copies of the handmade Wal.bo lyric book">
+              <button type="button" data-d="-1" aria-label="One copy fewer">−</button><output id="q-lyrics-hand">0</output><button type="button" data-d="1" aria-label="One copy more">+</button>
+            </div>
+            <a class="btn" href="#reserve" data-add="lyrics-hand">Reserve this book</a>
+            <a class="more" href="#walbo">About Wal.bo</a>
+          </div>
+        </div>
+      </article>
     </div>
   </div></div>
 </section>
@@ -528,7 +560,7 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
   <div class="wrap"><div class="inner res">
     <div>
       <h2 class="say">Reserve. <span lang="si">වෙන් කරගන්න.</span></h2>
-      <p class="note">No payment now. Both books are limited to 50 copies at €20 each, in print or as an ebook. Prepare your message here and send it to me. I’ll reply with payment and shipping details once copies are ready.</p>
+      <p class="note">No payment now. <span lang="si">මමංකාර</span> and the Wal.bo lyrics are limited to 50 copies at €20 each, in print or as an ebook. The handmade lyric book is limited to 10 pieces. Prepare your message here and send it to me. I’ll reply with payment and shipping details once copies are ready.</p>
       <ul class="picked" id="picked" aria-live="polite"></ul>
     </div>
     <form class="form" id="form" novalidate>
@@ -640,7 +672,7 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
       <div class="ab-grid">
         <div class="ab-body">
           <p>The name is one word split in two. Written whole, warthamaana is the present. Split, the same letters read as twisted dimensions.</p>
-          <p>The label supports my fellow <a href="#walbo">Wal.bo</a> members and <a href="#artists">our creative community</a> in their own careers. The publication house starts with two limited editions of 50 copies each: <a href="#publications"><span lang="si">මමංකාර</span> and the Wal.bo lyrics</a>.</p>
+          <p>The label supports my fellow <a href="#walbo">Wal.bo</a> members and <a href="#artists">our creative community</a> in their own careers. The publication house starts with two limited editions of 50 copies each: <a href="#publications"><span lang="si">මමංකාර</span> and the Wal.bo lyrics</a>. There is also a handmade Wal.bo lyric book, limited to 10 pieces.</p>
           <p>For now, Wartha Maana is me, so every message comes straight to me.</p>
           <p class="ab-sign">Sudhara Jayalath</p>
         </div>
@@ -695,7 +727,7 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
       </div>
     </div>
     <div class="r-doors">
-      <a class="btn" href="#publications">The lyrics book</a>
+      <a class="btn" href="#publications">The lyric books</a>
       <a class="btn line" href="#merch">The Wal.bo tee</a>
       <a class="btn line" href="#artists">All artists</a>
     </div>
@@ -763,6 +795,7 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
   var items=[
     {id:"book",name:"මමංකාර",qty:1,fmt:"fmt-book",price:20},
     {id:"lyrics",name:"Wal.bo lyrics",qty:0,fmt:"fmt-lyrics",price:20},
+    {id:"lyrics-hand",name:"Wal.bo lyrics, handmade",qty:0,max:10,hand:true},
     {id:"tee-wm",name:"Wartha Maana tee",qty:0,size:"size-tee-wm"},
     {id:"tee-wb",name:"Wal.bo tee",qty:0,size:"size-tee-wb"},
     {id:"tote",name:"Turmeric tote",qty:0},
@@ -771,9 +804,19 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
   var byId={};items.forEach(function(i){byId[i.id]=i});
   function label(i){return i.name+(i.fmt?", "+$(i.fmt).value:"")+(i.size?", size "+$(i.size).value:"")}
   function booksTotal(){
-    var total=0,print=false;
-    items.forEach(function(i){if(i.price&&i.qty>0){total+=i.price*i.qty;if($(i.fmt).value==="print")print=true}});
-    return{total:total,print:print};
+    var total=0,print=false,hand=false;
+    items.forEach(function(i){
+      if(!i.qty)return;
+      if(i.price){total+=i.price*i.qty;if($(i.fmt).value==="print")print=true}
+      if(i.hand){hand=true;print=true}
+    });
+    return{total:total,print:print,hand:hand};
+  }
+  function totalNote(sum){
+    var more=[];
+    if(sum.print)more.push("shipping");
+    if(sum.hand)more.push("the handmade book’s price");
+    return more.length?", plus "+more.join(" and "):"";
   }
   function renderPicked(){
     var ul=$("picked");ul.textContent="";
@@ -787,9 +830,9 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
       li.appendChild(n);li.appendChild(q);ul.appendChild(li);
     });
     var sum=booksTotal();
-    if(sum.total){
+    if(sum.total||sum.hand){
       var tl=document.createElement("li"),tn=document.createElement("span"),tq=document.createElement("span");
-      tn.textContent=sum.print?"Books total, plus shipping":"Books total";tq.textContent="€"+sum.total;tq.className="q";
+      tn.textContent=sum.total?"Books total"+totalNote(sum):"Handmade book price";tq.textContent=sum.total?"€"+sum.total:"To be set";tq.className="q";
       tl.appendChild(tn);tl.appendChild(tq);ul.appendChild(tl);
     }
   }
@@ -797,7 +840,7 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
     var it=byId[s.getAttribute("data-item")];
     s.addEventListener("click",function(e){
       var b=e.target.closest("button");if(!b)return;
-      it.qty=Math.max(0,Math.min(99,it.qty+Number(b.getAttribute("data-d"))));
+      it.qty=Math.max(0,Math.min(it.max||99,it.qty+Number(b.getAttribute("data-d"))));
       $("q-"+it.id).textContent=it.qty;
       renderPicked();$("out").hidden=true;
     });
@@ -813,7 +856,9 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
     if(!chosen.length){err.textContent="Choose at least one thing first: a book or some merch.";err.hidden=false;return}
     var lines=["Reservation for Wartha Maana","Name: "+name,"Ship to: "+$("r-ship").value,""];
     chosen.forEach(function(i){lines.push(label(i)+" × "+i.qty)});
-    var sum=booksTotal();if(sum.total)lines.push("Books total: €"+sum.total+(sum.print?", plus shipping":""));
+    var sum=booksTotal();
+    if(sum.total)lines.push("Books total: €"+sum.total+totalNote(sum));
+    else if(sum.hand)lines.push("Handmade book price: to be set");
     var note=$("r-note").value.trim();if(note){lines.push("","Note: "+note)}
     var text=lines.join("\n");
     $("r-text").value=text;$("out").hidden=false;$("copied").textContent="";
