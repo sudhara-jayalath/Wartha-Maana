@@ -345,7 +345,8 @@ svg{display:block}
 .vplay::after{content:"";position:absolute;left:21px;top:16px;border-left:18px solid var(--bg);border-top:11px solid transparent;border-bottom:11px solid transparent}
 .vid:hover .vplay,.vid:focus-visible .vplay{transform:scale(1.1)}
 .vid:hover .vt{text-decoration:underline}
-.vt{font:600 1.0625rem/1.2 var(--util)}
+.vt{font:600 1.0625rem/1.2 var(--util);overflow-wrap:anywhere;min-width:0}
+.vids li,.vid{min-width:0}
 .vu{font:400 .9375rem/1.2 var(--util);color:var(--soft);overflow-wrap:anywhere}
 .look-leaf .vframe{border:1px solid var(--hair);border-radius:16px;background:rgba(10,32,32,.6)}
 .r-people{display:grid;gap:24px clamp(40px,8vw,120px);padding-bottom:clamp(28px,4vw,48px)}
@@ -751,7 +752,7 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
     <div class="rail"><h1 tabindex="-1"><span class="si" lang="si">කලාකරුවන්</span><span class="en">Artists</span></h1></div>
     <ul class="roster">
       <li><a class="who" href="#walbo"><svg class="pic" viewBox="0 0 996 867" aria-hidden="true"><use href="#s-walbo"/></svg><span class="nm">Wal.bo</span><span class="ds">Underground folk punk, 2014 to early 2018</span></a></li>
-      <li><a class="who" href="#sudhara-jayalath"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="3"></svg><span class="nm">Sudhara Jayalath</span><span class="ds">Songwriter, Wal.bo</span></a></li>
+      <li><a class="who" href="#sudhara-jayalath"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="3"></svg><span class="nm">Sudhara Jayalath</span><span class="ds">Songwriter, frontman of Wal.bo</span></a></li>
       <li><a class="who" href="#sagara-weeratunga"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="8"></svg><span class="nm">Sagara Weeratunga (Paty)</span><span class="ds">Singer-songwriter and composer. R!ddlemach!ne, Wal.bo. Founder of Lythium Records and Project Acoustica</span></a></li>
       <li><a class="who" href="#kasun-jayamaha"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="14"></svg><span class="nm">Kasun Jayamaha</span><span class="ds">Drummer, R!ddlemach!ne and Wal.bo</span></a></li>
       <li><a class="who" href="#chamara-kahawewitharana"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="21"></svg><span class="nm">Chamara Kahawewitharana</span><span class="ds">Writer, Sinhala teacher, songwriter</span></a></li>
@@ -766,7 +767,7 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
     <h1 class="a-name" tabindex="-1"><span>Sudhara</span><span>Jayalath</span></h1>
     <div class="a-line" aria-hidden="true"></div>
     <div class="a-body">
-      <div class="a-desc"><h2 class="a-lab">About</h2><p>Songwriter and musician, based in Hamburg. A member of <a href="#walbo">Wal.bo</a> and the person behind Wartha Maana.</p><p>He is working on <i>hero</i>, an experimental rock album built on the hero’s journey, and wrote <span lang="si">මමංකාර</span>, an experimental philosophical piece in Sinhala with rhyme as its medium.</p></div>
+      <div class="a-desc"><h2 class="a-lab">About</h2><p>Songwriter and musician, based in Hamburg. The frontman of <a href="#walbo">Wal.bo</a> and the person behind Wartha Maana.</p><p>He is working on <i>hero</i>, an experimental rock album built on the hero’s journey, and wrote <span lang="si">මමංකාර</span>, an experimental philosophical piece in Sinhala with rhyme as its medium.</p></div>
       <div class="a-links"><h2 class="a-lab">Projects and channels</h2><a href="https://www.youtube.com/@wartamana" target=_blank rel=noopener>Wartha Maana on YouTube</a><a href="#publications" lang=si>මමංකාර, the pocket book</a><a href="#walbo">Wal.bo</a><p class="todo"><b>Draft.</b> Other projects and channels go here.</p></div>
     </div>
     <nav class="a-next" aria-label="More artists"><a class="btn" href="#sagara-weeratunga">Next: Sagara Weeratunga (Paty)</a><a class="btn line" href="#artists">All artists</a></nav>
@@ -869,21 +870,20 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
     <section class="r-videos" aria-labelledby="r-videos-h">
       <h2 class="a-lab" id="r-videos-h">On YouTube</h2>
       <ul class="vids">
-        <li><a class="vid" href="https://youtu.be/4XIhrzGpb0A" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="41"></svg><span class="vplay"></span></span><span class="vt">Watch on YouTube</span><span class="vu">youtu.be/4XIhrzGpb0A</span></a></li>
-        <li><a class="vid" href="https://youtu.be/gfq_6t-dfP0" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="48"></svg><span class="vplay"></span></span><span class="vt">Watch on YouTube</span><span class="vu">youtu.be/gfq_6t-dfP0</span></a></li>
-        <li><a class="vid" href="https://youtu.be/mUwD8TVpIOs" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="55"></svg><span class="vplay"></span></span><span class="vt">Watch on YouTube</span><span class="vu">youtu.be/mUwD8TVpIOs</span></a></li>
-        <li><a class="vid" href="https://youtu.be/f3B6JNFGf8I" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="62"></svg><span class="vplay"></span></span><span class="vt">Watch on YouTube</span><span class="vu">youtu.be/f3B6JNFGf8I</span></a></li>
-        <li><a class="vid" href="https://youtu.be/EL_XmaYQCYM" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="69"></svg><span class="vplay"></span></span><span class="vt">Watch on YouTube</span><span class="vu">youtu.be/EL_XmaYQCYM</span></a></li>
-        <li><a class="vid" href="https://youtu.be/C0QMC0aA6Go" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="76"></svg><span class="vplay"></span></span><span class="vt">Watch on YouTube</span><span class="vu">youtu.be/C0QMC0aA6Go</span></a></li>
+        <li><a class="vid" href="https://youtu.be/4XIhrzGpb0A" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="41"></svg><span class="vplay"></span></span><span class="vt">මොහොත (Mohotha) - Wal.bo (live as it got)</span><span class="vu">Watch on YouTube</span></a></li>
+        <li><a class="vid" href="https://youtu.be/gfq_6t-dfP0" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="48"></svg><span class="vplay"></span></span><span class="vt">සංවාද (Sanwaada) - Wal.bo</span><span class="vu">Watch on YouTube</span></a></li>
+        <li><a class="vid" href="https://youtu.be/mUwD8TVpIOs" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="55"></svg><span class="vplay"></span></span><span class="vt">පිටස්තරයා - Pitastharaya (Rambukkana edit) - Wal.bo</span><span class="vu">Watch on YouTube</span></a></li>
+        <li><a class="vid" href="https://youtu.be/f3B6JNFGf8I" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="62"></svg><span class="vplay"></span></span><span class="vt">ඔන්න එනෝ (Onna enO) - WAL.BO live @ ITUM</span><span class="vu">Watch on YouTube</span></a></li>
+        <li><a class="vid" href="https://youtu.be/EL_XmaYQCYM" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="69"></svg><span class="vplay"></span></span><span class="vt">Sadai Mamai Hewanallai (සඳයි මමයි හෙවණැල්ලයි) An Acoustic version- Paty (WAL.BO)</span><span class="vu">Watch on YouTube</span></a></li>
+        <li><a class="vid" href="https://youtu.be/C0QMC0aA6Go" target="_blank" rel="noopener"><span class="vframe" aria-hidden="true"><svg class="sig" viewBox="0 0 100 100" data-seed="76"></svg><span class="vplay"></span></span><span class="vt">මොහොත Mohotha_Wal.bo_Tatathā</span><span class="vu">Watch on YouTube</span></a></li>
       </ul>
-      <p class="todo"><b>Draft.</b> Song titles for each video go here.</p>
     </section>
     <div class="r-end" id="r-end" aria-hidden="true"></div>
     <div class="r-people">
       <div>
         <h2 class="a-lab">Played in Wal.bo</h2>
         <ul>
-          <li><a href="#sudhara-jayalath">Sudhara Jayalath</a></li>
+          <li><a href="#sudhara-jayalath">Sudhara Jayalath</a>, frontman</li>
           <li><a href="#sagara-weeratunga">Sagara Weeratunga (Paty)</a></li>
           <li><a href="#kasun-jayamaha">Kasun Jayamaha</a>, drums</li>
         </ul>
