@@ -167,6 +167,13 @@ svg{display:block}
 .split .part{height:var(--H);width:auto;flex:none}
 .slot{width:calc(var(--H)*1.36);flex:none;display:flex;justify-content:center;transition:width .9s cubic-bezier(.7,0,.2,1)}
 .slot svg{width:calc(var(--H)*1.36);height:calc(var(--H)*1.866);flex:none;transition:transform 1s cubic-bezier(.7,0,.2,1),opacity .4s ease}
+/* the word sinks, rain falls on the water where it was */
+.rain{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0;transition:opacity 2.4s ease}
+.field.wet .rain{opacity:1}
+.split{transition:gap .9s cubic-bezier(.7,0,.2,1),opacity 1.9s ease,filter 1.9s ease,transform 2.2s cubic-bezier(.4,0,.2,1)}
+.split.sunk{opacity:0;filter:blur(10px);transform:translateY(14px) scale(.985);pointer-events:none}
+.look-wall .field::before{transition:opacity 2.4s ease}
+.look-wall .field.wet::before{opacity:.14}
 .split.joined{--gap:0px}
 .split.joined .slot{width:0}
 .split.joined .slot svg{transform:rotate(-180deg) scale(.15);opacity:0}
@@ -181,7 +188,7 @@ svg{display:block}
 .lede .root i{font-style:italic}
 @media (min-width:980px){.lede{grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:end}}
 @media (max-width:640px){
-  .split{--H:calc((100vw - 32px)/5.2);--gap:calc(var(--H)*.62);display:grid;grid-template-columns:auto auto;justify-content:center;row-gap:18px;transition:column-gap .9s cubic-bezier(.7,0,.2,1);column-gap:var(--gap)}
+  .split{--H:calc((100vw - 32px)/5.2);--gap:calc(var(--H)*.62);display:grid;grid-template-columns:auto auto;justify-content:center;row-gap:18px;transition:column-gap .9s cubic-bezier(.7,0,.2,1),opacity 1.9s ease,filter 1.9s ease,transform 2.2s cubic-bezier(.4,0,.2,1);column-gap:var(--gap)}
   .slot{grid-column:1 / -1;grid-row:1;justify-self:center;width:auto}
   .slot svg{width:min(62vw,250px);height:calc(min(62vw,250px)*1.372)}
   .split.joined .slot{width:auto}
@@ -534,6 +541,7 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
 <main id="home">
 <section class="band y hero" id="top">
   <div class="field">
+  <canvas class="rain" id="rain" aria-hidden="true"></canvas>
   <div class="wrap field-in"><div class="inner">
     <p class="entry"><span class="si" lang="si">වර්තමාන</span> <i>warthamaana</i> <span>the present, now-time</span></p>
 
@@ -951,7 +959,12 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
     if(j){turn.style.gridColumn="1 / -1";turn.style.justifySelf="center";turn.style.gridRow="2"}
     else{turn.style.gridColumn=turn.style.justifySelf=turn.style.gridRow=""}
   }
-  turn.addEventListener("click",function(){setJoined(!split.classList.contains("joined"))});
+  var water=null,touched=false;
+  turn.addEventListener("click",function(){
+    touched=true;
+    if(water&&split.classList.contains("sunk")){split.classList.remove("sunk");water.ripple(split,true)}
+    setJoined(!split.classList.contains("joined"));
+  });
   if(!reduced){
     split.classList.add("still");
     setJoined(true);
@@ -959,6 +972,82 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
     split.classList.remove("still");
     setTimeout(function(){setJoined(false)},1000);
   }
+
+  /* rain on shallow water: the word sinks after a few seconds and drops fall where it was */
+  water=(function(){
+    var cv=$("rain");
+    if(!cv||reduced||!cv.getContext)return null;
+    var field=cv.parentNode,ctx=cv.getContext("2d");
+    var W=0,H=0,drops=[],col="240,240,230",on=false,seen=true,raf=0,last=0,next=0,t0=0,frame=0;
+    function size(){
+      var r=field.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);
+      W=r.width;H=r.height;cv.width=Math.max(1,Math.round(W*dpr));cv.height=Math.max(1,Math.round(H*dpr));
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    function recolor(){var m=getComputedStyle(field).color.match(/[\d.]+/g);if(m)col=m[0]+","+m[1]+","+m[2]}
+    function drop(x,y,big){
+      var depth=.42+.58*Math.min(1,Math.max(0,y/Math.max(H,1)));   /* nearer the viewer = larger */
+      drops.push({x:x,y:y,t:0,d:depth,s:depth*(big?2.6:.75+Math.random()*.5),n:big?4:2+(Math.random()<.45?1:0),life:big?4.2:2.6});
+      if(drops.length>70)drops.shift();
+      kick();
+    }
+    function ring(d,r,a,w){
+      ctx.strokeStyle="rgba("+col+","+a.toFixed(3)+")";ctx.lineWidth=w;
+      ctx.beginPath();ctx.ellipse(d.x,d.y,r,r*.3,0,0,6.2832);ctx.stroke();
+    }
+    function tick(now){
+      raf=0;
+      var dt=Math.min((now-(last||now))/1000,.05);last=now;
+      if(++frame%40===1)recolor();
+      if(on&&seen){
+        var target=Math.min(4.6,Math.max(1.8,W*H/100000)),rate=target*Math.min(1,(now-t0)/4000);
+        next-=dt;
+        if(next<=0){drop(W*(.03+Math.random()*.94),H*(.24+Math.random()*.72));next=-Math.log(1-Math.random())/Math.max(rate,.2)}
+      }
+      ctx.clearRect(0,0,W,H);
+      for(var i=drops.length-1;i>=0;i--){
+        var d=drops[i];d.t+=dt;
+        if(d.t>=d.life+.5){drops.splice(i,1);continue}
+        if(d.t<.16){                                                    /* the moment of impact */
+          ctx.fillStyle="rgba("+col+","+(.55*(1-d.t/.16)*d.d).toFixed(3)+")";
+          ctx.beginPath();ctx.ellipse(d.x,d.y,2*d.s,.9*d.s,0,0,6.2832);ctx.fill();
+        }
+        for(var k=0;k<d.n;k++){
+          var tk=d.t-k*.17;if(tk<=0)continue;
+          var q=tk/d.life;if(q>=1)continue;
+          var r=d.s*(4+86*(1-Math.pow(1-q,2.4)));
+          var a=.78*Math.pow(1-q,1.5)*(1-k*.2)*(.5+.5*d.d);
+          ring(d,r,a,Math.max(.6,(1.7-q)*d.s));
+          if(k===0&&q<.7)ring(d,r*.9,a*.35,Math.max(.4,(1.1-q)*d.s*.6)); /* the trough just inside the crest */
+        }
+      }
+      if((on&&seen)||drops.length)raf=requestAnimationFrame(tick);else last=0;
+    }
+    function kick(){if(!raf)raf=requestAnimationFrame(tick)}
+    function ripple(el,big){
+      var a=el.getBoundingClientRect(),b=cv.getBoundingClientRect();
+      var slot=el.querySelector&&el.querySelector(".slot svg"),c=slot?slot.getBoundingClientRect():a;
+      if(c.width<2)c=a;
+      drop(c.left+c.width/2-b.left,c.top+c.height/2-b.top,big);
+    }
+    function begin(){
+      if(on)return;on=true;t0=performance.now();next=1.2;
+      field.classList.add("wet");kick();
+    }
+    size();recolor();
+    if(window.ResizeObserver)new ResizeObserver(size).observe(field);else addEventListener("resize",size);
+    if(window.IntersectionObserver)new IntersectionObserver(function(e){seen=e[0].isIntersecting;if(seen)kick()}).observe(field);
+    document.addEventListener("visibilitychange",function(){seen=!document.hidden;if(seen)kick()});
+    field.addEventListener("pointerdown",function(e){
+      if(!on||e.target.closest("a,button,input,select,textarea"))return;
+      var b=cv.getBoundingClientRect();drop(e.clientX-b.left,e.clientY-b.top,false);
+    });
+    setTimeout(function(){
+      if(!touched){split.classList.add("sunk");setTimeout(function(){ripple(split,true)},350)}
+      begin();
+    },4600);
+    return {ripple:ripple};
+  })();
 
   /* the small mark turns once over the length of the page */
   var mark=$("turnmark");
