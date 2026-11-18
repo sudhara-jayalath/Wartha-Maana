@@ -514,7 +514,7 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
 </head>
 <body>
 
-<script>(function(){var ok={leaf:1,wallpaper:1,turmeric:1},l="leaf";try{var q=new URLSearchParams(location.search).get("look");if(ok[q])l=q;else{var v=localStorage.getItem("wm-look");if(ok[v])l=v}}catch(e){}var c=document.documentElement.classList;if(l==="leaf")c.add("look-leaf");if(l==="wallpaper")c.add("look-wall")})();</script>
+<script>document.documentElement.classList.add("look-leaf")</script>
 
 <div class="glade" aria-hidden="true"><div class="glade-light"></div><div class="glade-grain"></div></div>
 
@@ -534,7 +534,6 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
       <a class="opt" href="#reserve">Reserve</a>
       <a href="#about">About us</a>
     </nav>
-    <button class="look-btn" id="look-btn" type="button" aria-label="Switch to the wallpaper look" title="Switch to the wallpaper look"><span class="sw" aria-hidden="true"></span></button>
   </div>
 </header>
 
@@ -911,7 +910,6 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
       <p>An artist collective, a record label and publication house. <a href="#about">About us and contact</a></p>
       <p>www.wartha-maana.com · <a href="https://www.youtube.com/@wartamana" target="_blank" rel="noopener">YouTube</a></p>
       <small>Set in Abhaya Libre, Stick No Bills and Yaldevi, all from Mooniak. Abhaya Libre follows the Sinhala letterpress faces of the 1960s. Stick No Bills began as the house type of a poster gallery in Galle.</small>
-      <div class="looks" role="group" aria-labelledby="looks-l"><span id="looks-l">Look</span><button class="btn line" type="button" data-look="leaf" aria-pressed="true">Leaf light</button><button class="btn line" type="button" data-look="wallpaper" aria-pressed="false">Wallpaper</button><button class="btn line" type="button" data-look="turmeric" aria-pressed="false">Turmeric</button></div>
       <small>© 2026 Sudhara Jayalath</small>
     </div>
   </div></div>
@@ -932,12 +930,12 @@ select,input,textarea{font:400 1.0625rem/1.3 var(--util);color:var(--field-fg);b
   function setLook(l,save){
     var c=document.documentElement.classList,b=$("look-btn");
     c.toggle("look-leaf",l==="leaf");c.toggle("look-wall",l==="wallpaper");
-    var t="Switch to the "+NAMES[nextLook()]+" look";b.setAttribute("aria-label",t);b.title=t;
+    if(b){var t="Switch to the "+NAMES[nextLook()]+" look";b.setAttribute("aria-label",t);b.title=t}
     document.querySelectorAll("[data-look]").forEach(function(x){x.setAttribute("aria-pressed",String(x.getAttribute("data-look")===l))});
     if(save){try{localStorage.setItem("wm-look",l)}catch(e){}}
     if(lookReady)requestAnimationFrame(function(){drawView(current(),false)});
   }
-  $("look-btn").addEventListener("click",function(){setLook(nextLook(),true)});
+  if($("look-btn"))$("look-btn").addEventListener("click",function(){setLook(nextLook(),true)});
   document.querySelectorAll("[data-look]").forEach(function(x){x.addEventListener("click",function(){setLook(x.getAttribute("data-look"),true)})});
   setLook(curLook(),false);
 
