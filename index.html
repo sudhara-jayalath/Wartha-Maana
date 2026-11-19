@@ -403,6 +403,28 @@ details[open] > summary ~ *{animation:unfold .55s cubic-bezier(.2,.7,.2,1) both}
 @media (min-width:860px){.r-hero{grid-template-columns:minmax(0,6fr) minmax(0,5fr)}.r-row{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
 
 /* artists */
+/* Artists: a field of pools, still until touched */
+.pools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:dense;gap:clamp(10px,1.4vw,18px);min-width:0}
+@media (min-width:760px){.pools{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1180px){.pools{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.pools>li{min-width:0}
+.pools .p-big{grid-column:span 2;grid-row:span 2}
+.pools .p-wide{grid-column:span 2}
+.pool{position:relative;display:block;aspect-ratio:1;border-radius:clamp(16px,2vw,26px);overflow:hidden;text-decoration:none;color:var(--fg);
+  background:color-mix(in srgb,var(--fg) 5%,transparent);border:1px solid color-mix(in srgb,var(--fg) 16%,transparent);transition:background .5s ease,border-color .5s ease}
+.pool:hover,.pool:focus-visible{border-color:color-mix(in srgb,var(--fg) 38%,transparent)}
+.pool:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.pool canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.p-label{position:absolute;left:0;right:0;bottom:0;padding:clamp(12px,1.6vw,20px);display:grid;gap:4px;pointer-events:none;background:linear-gradient(to top,color-mix(in srgb,var(--bg) 78%,transparent),transparent)}
+.p-nm{font:var(--fw-head) clamp(1.125rem,1.9vw,1.625rem)/1.12 var(--util);text-wrap:balance;overflow-wrap:anywhere}
+.p-big .p-nm{font-size:clamp(1.75rem,3.6vw,3rem)}
+.p-ds{font:var(--fw-text) clamp(.8125rem,1vw,.9375rem)/1.35 var(--util);color:var(--soft);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.p-text{height:100%;border-radius:clamp(16px,2vw,26px);border:1px dashed color-mix(in srgb,var(--fg) 18%,transparent);padding:clamp(16px,2vw,28px);display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.p-text p{margin:0;font:var(--fw-text) clamp(1.0625rem,1.6vw,1.375rem)/1.35 var(--util);max-width:26em;text-wrap:pretty}
+.p-text small{color:var(--soft);font:var(--fw-text) .875rem/1.35 var(--util)}
+.look-leaf .pool{background:rgba(6,22,22,.3);border-color:rgba(238,244,234,.12);box-shadow:inset 0 14px 34px rgba(0,10,10,.22)}
+.look-leaf .pool:hover,.look-leaf .pool:focus-visible{background:rgba(8,30,30,.46);border-color:rgba(207,232,214,.35)}
+.look-leaf .p-label{background:linear-gradient(to top,rgba(6,20,20,.6),rgba(6,20,20,0))}
 .roster{display:grid;min-width:0}
 .who{display:grid;grid-template-columns:clamp(60px,8vw,112px) minmax(0,1fr);gap:4px clamp(14px,2.4vw,32px);align-items:center;padding:clamp(14px,2vw,24px) clamp(0px,1vw,12px);border-top:3px solid var(--fg);text-decoration:none}
 .roster li:last-child .who{border-bottom:3px solid var(--fg)}
@@ -823,14 +845,15 @@ select,input,textarea{font:var(--fw-text) 1.0625rem/1.3 var(--util);color:var(--
 <div class="band k room view" id="artists" hidden>
   <div class="wrap"><div class="inner sec">
     <div class="rail"><h1 tabindex="-1"><span class="si" lang="si">කලාකරුවන්</span><span class="en">Artists</span></h1></div>
-    <ul class="roster">
-      <li><a class="who" href="#walbo"><svg class="pic" viewBox="0 0 996 867" aria-hidden="true"><use href="#s-walbo"/></svg><span class="nm">Wal.bo</span><span class="ds">Underground folk punk, 2014 to early 2018</span></a></li>
-      <li><a class="who" href="#sudhara-jayalath"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="3"></svg><span class="nm">Sudhara Jayalath</span><span class="ds">Songwriter, frontman of Wal.bo</span></a></li>
-      <li><a class="who" href="#sagara-weeratunga"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="8"></svg><span class="nm">Sagara Weeratunga (Paty)</span><span class="ds">Singer-songwriter and composer. R!ddlemach!ne, Wal.bo. Founder of Lythium Records and Project Acoustica</span></a></li>
-      <li><a class="who" href="#kasun-jayamaha"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="14"></svg><span class="nm">Kasun Jayamaha</span><span class="ds">Drummer, R!ddlemach!ne and Wal.bo</span></a></li>
-      <li><a class="who" href="#chamara-kahawewitharana"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="21"></svg><span class="nm">Chamara Kahawewitharana</span><span class="ds">Writer, Sinhala teacher, songwriter</span></a></li>
-      <li><a class="who" href="#harsha-samaraweera"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="28"></svg><span class="nm">Harsha Samaraweera</span><span class="ds">Product designer, Tribe Ceylon. Designed the Wartha Maana logo</span></a></li>
-      <li><a class="who" href="#mahesh-dahanayake"><svg class="pic sig" viewBox="0 0 100 100" aria-hidden="true" data-seed="35"></svg><span class="nm">Mahesh B Dahanayake</span><span class="ds">Landscape architect and thinker, Sri Lanka. Studio Kumbuk</span></a></li>
+    <ul class="pools">
+      <li class="p-big"><a class="pool" href="#walbo" data-seed="0" data-walbo><canvas aria-hidden="true"></canvas><span class="p-label"><span class="p-nm">Wal.bo</span><span class="p-ds">Underground folk punk, 2014 to early 2018</span></span></a></li>
+      <li><a class="pool" href="#sudhara-jayalath" data-seed="3"><canvas aria-hidden="true"></canvas><span class="p-label"><span class="p-nm">Sudhara Jayalath</span><span class="p-ds">Songwriter, frontman of Wal.bo</span></span></a></li>
+      <li><a class="pool" href="#sagara-weeratunga" data-seed="8"><canvas aria-hidden="true"></canvas><span class="p-label"><span class="p-nm">Sagara Weeratunga (Paty)</span><span class="p-ds">Singer-songwriter and composer. R!ddlemach!ne, Wal.bo. Founder of Lythium Records and Project Acoustica</span></span></a></li>
+      <li><a class="pool" href="#kasun-jayamaha" data-seed="14"><canvas aria-hidden="true"></canvas><span class="p-label"><span class="p-nm">Kasun Jayamaha</span><span class="p-ds">Drummer, R!ddlemach!ne and Wal.bo</span></span></a></li>
+      <li class="p-wide"><div class="p-text"><p>The band and the friends around it: musicians, writers, designers and landscape architects. Each one a field of their own.</p><small>Move over a field, or touch it, to make it rain.</small></div></li>
+      <li><a class="pool" href="#chamara-kahawewitharana" data-seed="21"><canvas aria-hidden="true"></canvas><span class="p-label"><span class="p-nm">Chamara Kahawewitharana</span><span class="p-ds">Writer, Sinhala teacher, songwriter</span></span></a></li>
+      <li><a class="pool" href="#harsha-samaraweera" data-seed="28"><canvas aria-hidden="true"></canvas><span class="p-label"><span class="p-nm">Harsha Samaraweera</span><span class="p-ds">Product designer, Tribe Ceylon. Designed the Wartha Maana logo</span></span></a></li>
+      <li><a class="pool" href="#mahesh-dahanayake" data-seed="35"><canvas aria-hidden="true"></canvas><span class="p-label"><span class="p-nm">Mahesh B Dahanayake</span><span class="p-ds">Landscape architect and thinker, Sri Lanka. Studio Kumbuk</span></span></a></li>
     </ul>
   </div></div>
 </div>
@@ -1427,8 +1450,88 @@ select,input,textarea{font:var(--fw-text) 1.0625rem/1.3 var(--util);color:var(--
   var views=[].slice.call(document.querySelectorAll(".view")),first=true;
   var navArtists=document.querySelector('.top nav a[href="#artists"]'),navAbout=document.querySelector('.top nav a[href="#about"]');
   function setCurrent(a,on){if(on)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")}
+
+  /* Artists: every artist is a pool. It lies still until a pointer or a finger touches it, then rain falls on it
+     and the artist's scribble under the water bends with the rings. */
+  var pools=null,poolRaf=0,poolLast=0,poolInk="238,244,234";
+  function poolSample(d,step,s){
+    var svg=document.createElementNS("http://www.w3.org/2000/svg","svg"),p=document.createElementNS("http://www.w3.org/2000/svg","path");
+    svg.setAttribute("width","0");svg.setAttribute("height","0");svg.style.cssText="position:absolute;visibility:hidden";
+    p.setAttribute("d",d);svg.appendChild(p);document.body.appendChild(svg);
+    var L=p.getTotalLength(),n=Math.max(8,Math.ceil(L/step)),out=[];
+    for(var i=0;i<=n;i++){var q=p.getPointAtLength(L*i/n);out.push({x:q.x*s,y:q.y*s})}
+    document.body.removeChild(svg);return out;
+  }
+  function poolShape(el){
+    if(el.hasAttribute("data-walbo")){
+      var sym=document.getElementById("s-walbo"),path=sym&&sym.querySelector("path");
+      if(path){var vb=sym.getAttribute("viewBox").split(/\s+/).map(Number),s=1/Math.max(vb[2],vb[3]);
+        return{fill:true,w:vb[2]*s,h:vb[3]*s,parts:path.getAttribute("d").split(/(?=M)/).filter(function(x){return x.trim()}).map(function(d){return poolSample(d,3,s)})}}
+    }
+    var pts=sigil(+el.getAttribute("data-seed")||1);
+    return{fill:false,w:1,h:.62,parts:[poolSample(smooth(pts.map(function(q){return{x:q.x*1000,y:q.y*1000}})),6,.001)]};
+  }
+  function poolSize(p){
+    var r=p.el.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);
+    p.W=r.width;p.H=r.height;if(!p.W)return;
+    p.cv.width=Math.round(p.W*dpr);p.cv.height=Math.round(p.H*dpr);p.ctx=p.cv.getContext("2d");p.ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function poolDrop(p,x,y,big){
+    var m=Math.min(p.W,p.H),depth=.55+.45*(y/p.H);
+    p.drops.push({x:x,y:y,t:0,R:m*(big?.42:.17+Math.random()*.1)*p.scale*depth,n:big?p.rings+1:p.rings,life:big?3.6:2.3+Math.random()*.6,d:depth});
+    if(p.drops.length>40)p.drops.shift();
+    if(!poolRaf)poolRaf=requestAnimationFrame(poolLoop);
+  }
+  function poolDraw(p,now,dt){
+    var c=p.ctx,W=p.W,H=p.H;if(!c||!W)return false;
+    if(p.hot>0){p.next-=dt;if(p.next<=0){poolDrop(p,W*(.06+Math.random()*.88),H*(.08+Math.random()*.7));p.next=-Math.log(1-Math.random())/(p.rate*4)}p.hot=Math.max(0,p.hot-dt*.4)}
+    var rings=[];
+    p.drops.forEach(function(d){for(var k=0;k<d.n;k++){var tk=d.t-k*.18;if(tk<=0)continue;var q=tk/d.life;if(q>=1)continue;
+      rings.push({x:d.x,y:d.y,r:d.R*(1-Math.pow(1-q,2.3))+2,a:Math.pow(1-q,1.6)*(1-k*.2)*(.5+.5*d.d)})}});
+    var stir=Math.min(1,rings.length/3+p.hot),t=now/1000,m=Math.min(W,H),S=p.shape,sz=m*(S.fill?.62:.58),ox=(W-sz*S.w)/2,oy=H*(W<260?.32:.4)-sz*S.h/2;
+    function bend(x,y){
+      var dx=Math.sin(t*.7+y*.045+p.phase)*.8*stir,dy=Math.cos(t*.6+x*.04+p.phase)*.6*stir;
+      for(var i=0;i<rings.length;i++){var g=rings[i],ex=x-g.x,ey=(y-g.y)/p.tilt,dist=Math.sqrt(ex*ex+ey*ey)||1,o=(dist-g.r)/9,f=7*g.a*Math.exp(-o*o);dx+=ex/dist*f;dy+=ey/dist*f*p.tilt}
+      return[x+dx,y+dy];
+    }
+    c.clearRect(0,0,W,H);
+    c.lineCap=c.lineJoin="round";
+    if(S.fill){c.fillStyle="rgba("+poolInk+",.2)";c.beginPath();
+      S.parts.forEach(function(pts){pts.forEach(function(q,i){var b=bend(ox+q.x*sz,oy+q.y*sz);if(i)c.lineTo(b[0],b[1]);else c.moveTo(b[0],b[1])});c.closePath()});c.fill("evenodd")}
+    else{c.strokeStyle="rgba("+poolInk+",.26)";c.lineWidth=Math.max(1.6,m*.016);
+      S.parts.forEach(function(pts){c.beginPath();pts.forEach(function(q,i){var b=bend(ox+q.x*sz,oy+q.y*sz);if(i)c.lineTo(b[0],b[1]);else c.moveTo(b[0],b[1])});c.stroke()})}
+    rings.forEach(function(g){c.strokeStyle="rgba("+poolInk+","+(.78*g.a).toFixed(3)+")";c.lineWidth=Math.max(.6,1.5*g.a+.3);c.beginPath();c.ellipse(g.x,g.y,g.r,g.r*p.tilt,0,0,6.2832);c.stroke()});
+    for(var i=p.drops.length-1;i>=0;i--){var d=p.drops[i];d.t+=dt;if(d.t>d.life+.6)p.drops.splice(i,1)}
+    return p.drops.length>0||p.hot>0;
+  }
+  function poolLoop(now){
+    poolRaf=0;var dt=Math.min((now-(poolLast||now))/1000,.05),busy=false;poolLast=now;
+    pools.forEach(function(p){if(p.drops.length||p.hot>0){if(poolDraw(p,now,dt))busy=true}});
+    if(busy&&!document.hidden)poolRaf=requestAnimationFrame(poolLoop);else poolLast=0;
+  }
+  function poolsShow(){
+    var els=[].slice.call(document.querySelectorAll(".pools .pool"));if(!els.length)return;
+    var m=getComputedStyle(els[0]).color.match(/[\d.]+/g);if(m)poolInk=m[0]+","+m[1]+","+m[2];
+    if(!pools){
+      pools=els.map(function(el){
+        var r=seeded((+el.getAttribute("data-seed")||5)*97+11);
+        var p={el:el,cv:el.querySelector("canvas"),ctx:null,W:0,H:0,drops:[],shape:poolShape(el),rate:el.hasAttribute("data-walbo")?1.5:.6+r()*.7,
+          rings:2+Math.floor(r()*3),scale:.8+r()*.5,tilt:.36+r()*.14,phase:r()*6.28,next:0,hot:0,lastPtr:0};
+        function at(e){var b=el.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]}
+        if(!reduced){
+          el.addEventListener("pointerenter",function(e){var q=at(e);p.hot=1;poolDrop(p,q[0],q[1],true)});
+          el.addEventListener("pointerdown",function(e){var q=at(e);p.hot=1;poolDrop(p,q[0],q[1],true)});
+          el.addEventListener("pointermove",function(e){var now=performance.now();p.hot=1;if(now-p.lastPtr>220){p.lastPtr=now;var q=at(e);poolDrop(p,q[0],q[1],false)}});
+          el.addEventListener("focus",function(){p.hot=.6;poolDrop(p,p.W/2,p.H*.4,true)});
+        }
+        return p;
+      });
+    }
+    pools.forEach(function(p){poolSize(p);poolDraw(p,performance.now(),0)});
+  }
   function drawView(view,animate){
     if(!view)return;
+    if(view.id==="artists")poolsShow();
     if(view.id==="walbo")drawThread();
     else if(view.classList.contains("artist"))drawLine(view,animate);
   }
